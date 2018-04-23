@@ -3,15 +3,22 @@ var names = ["Huey","Dewey","Lewey","Scrooge","Dealer"];
 var players = [];
 
 function createPlayer() {
-    var hand =[];
     players =[];
     for(i=0; i<names.length; i++){
+       // var dealtCard = deck.shift();
         var player ={
             name: names[i],
-            hand: hand,
+            hand: [],
             total: 0,
-            bank: 200};
-        players.push(player);
+            bank: 200,
+            hit: function(deck){
+                var dealtCard = deck.shift();
+                this.hand.unshift(dealtCard);
+                this.total += dealtCard.value;
+                console.log(this.name + " hits and recieves the " +dealtCard.name +
+                " of "+ dealtCard.suit + ". Total is now "+ this.total);
+            }};
+            players.push(player);
         }
         return players;
     };

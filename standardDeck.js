@@ -2,7 +2,7 @@ var Deck = require('./deck.js');
 var Card = require('./standardCard.js');
 
 const standardDeckSize = 52;
-const suits =  ['diamond','heart','club','spade'];
+const suits =  ['Diamonds','Hearts','Clubs','Spades'];
 const values = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
 
 var generateCards = function(){
