@@ -28,6 +28,10 @@ var dealtCard = deck.shift();
 function dealCards() {
     for (i = 0; i < 2; i++) {
         for (x = 0; x < p.players.length; x++) {
+            if(p.players[x].bank <15){
+                x++;
+            }
+            else{
             var dealtCard = deck.shift();
 
             if (i == 1 && x == 4) {
@@ -47,7 +51,7 @@ function dealCards() {
             } else {
                 p.players[x].hand.unshift(dealtCard);
             }
-        }
+        }}
     }
 };
 function shuffle(deck) {
@@ -79,17 +83,23 @@ for (x = 0; x < deck.length; x++) {
 };
 function cardsReturned() {
     for (x = 0; x < p.players.length; x++) {
+        if(p.players[x].bank <15){
+            x++;
+        }else{
         //unsure of why i need the +1 below, for loop to work.
         for (i = 0; i <= p.players[x].hand.length + 1; i++) {
             var returnCard = p.players[x].hand.pop();
             deck.push(returnCard);
             p.players[x].total -= returnCard.value;
         }
-    }
+    }}
 };
 function strategy() {
     for (x = 0; x < p.players.length - 1; x++) {
-        if (p.players[x].total >= 12 && p.players[x].total <= 16 && p.players[4].hand[0].value >= 7) {
+        if(p.players[x].bank < 15){
+            x++;
+        }else{
+        if (p.players[x].total >= 12 && p.players[x].total <= 16 && dealer.hand[0].value >= 7) {
             p.players[x].hit(deck);
         }
         else if (p.players[x].total <= 12) {
@@ -103,7 +113,7 @@ function strategy() {
         else {
             console.log(p.players[x].name + " stays with a total of " + p.players[x].total);
         }
-    }
+    }}
 };
 function dealerStrategy() {
     if (dealer.total < 16) {
@@ -115,6 +125,10 @@ function dealerStrategy() {
 };
 function evaluateCards() {
     for (x = 0; x < p.players.length - 1; x++) {
+        if(p.players[x].bank < 15){
+            x++;
+        }
+        else{
         if (p.players[x].total > 21) {
             p.players[x].bank -= 15;
             dealer.bank += 15;
@@ -133,7 +147,7 @@ function evaluateCards() {
             dealer.bank += 15;
             console.log(p.players[x].name + " loses. He now has $" + p.players[x].bank);
         }
-    }
+    }}
 };
 
 
@@ -147,6 +161,10 @@ for(y=1;y <= rounds; y++){
     dealerStrategy();
     evaluateCards();
     cardsReturned(); 
-    console.log(deck.length);
+    console.log(p.players[1].hand);//hewey
+    console.log(p.players[2].hand);//dewey
+    console.log(p.players[3].hand);//lewey
+    console.log(p.players[4].hand);//scrooge
+
 };
 
